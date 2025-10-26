@@ -4,40 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Secure Portal{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-               line-height: 1.6; background: #f4f7f6; color: #333; margin: 0; }
-        .container { max-width: 800px; margin: 2rem auto; 
-                     padding: 2rem; background: #fff; border-radius: 8px; 
-                     box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        nav { background: #2c3e50; color: #fff; padding: 1rem; }
-        nav .container { display: flex; justify-content: space-between; 
-                         align-items: center; padding: 0 1rem; margin: 0 auto; 
-                         box-shadow: none; background: none; }
-        nav a { color: #fff; text-decoration: none; font-weight: bold; }
-        nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1rem; }
-        .form-group { margin-bottom: 1.25rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="password"],
-        .form-group input[type="file"] { 
-            width: calc(100% - 1.6rem); padding: 0.8rem; border: 1px solid #ccc; 
-            border-radius: 5px; font-size: 1rem; 
-        }
-        .btn { padding: 0.8rem 1.5rem; background: #3498db; color: #fff; 
-               border: none; cursor: pointer; text-decoration: none; 
-               border-radius: 5px; font-size: 1rem; transition: background 0.2s; }
-        .btn:hover { background: #2980b9; }
-        .messages { list-style: none; padding: 0; margin: 0 0 1.5rem 0; }
-        .messages li { padding: 1rem; margin-bottom: 1rem; border-radius: 5px; }
-        .messages .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .messages .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .messages .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
-        th, td { padding: 0.8rem; border: 1px solid #ddd; text-align: left; }
-        th { background: #f4f7f6; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <nav>
@@ -55,7 +22,7 @@
         </div>
     </nav>
 
-    <div class="content-wrapper>
+    <div class="content-wrapper">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <ul class="messages">
