@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ current_user.username }}! Here are the most recent file uploads.</p>
+    <hr>
+    
+    <h2>Uploaded Files</h2>
+    <div style="overflow-x:auto;"> <table>
+            <thead>
+                <tr>
+                    <th>Date / Time (UTC)</th>
+                    <th>From</th>
+                    <th>Email</th>
+                    <th>Original Filename</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in files %}
+                <tr>
+                    <td>{{ file.upload_timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ file.client_name }}</td>
+                    <td>{{ file.client_email }}</td>
+                    <td>{{ file.original_filename }}</td>
+                    <td>
+                        <a href="{{ url_for('download_file', filename=file.saved_filename) }}" class="btn">
+                            Download
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" style="text-align: center;">No files have been uploaded yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

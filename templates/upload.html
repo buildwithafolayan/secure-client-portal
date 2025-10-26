@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Upload a File{% endblock %}
+
+{% block content %}
+    <h1>Secure File Upload</h1>
+    <p>Please use this form to send us your sensitive documents.</p>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Your Email *</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="file">Your File *</label>
+            <input type="file" id="file" name="file" required>
+        </div>
+        <button type="submit" class="btn">Upload File</button>
+    </form>
+{% endblock %}
