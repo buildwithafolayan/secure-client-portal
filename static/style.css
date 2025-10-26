@@ -40,6 +40,7 @@ h1 { font-size: 2.2rem; }
 h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
 
 p {
+    color: var(--text); /* Fix: Ensure paragraph text is light */
     margin-top: 0;
     margin-bottom: 1.5rem;
 }
@@ -117,7 +118,7 @@ nav ul a:hover {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: var(--heading);
+    color: var(--heading); /* Fix: Ensure labels are bright white */
 }
 
 .form-group input[type="text"],
@@ -126,10 +127,10 @@ nav ul a:hover {
     width: 100%;
     padding: 0.9rem 1rem;
     border: 1px solid var(--border);
-    background: var(--background);
+    background: var(--background); /* Fix: Dark background for input */
     border-radius: 8px;
     font-size: 1rem;
-    color: var(--text);
+    color: var(--text); /* Fix: Light text color when typing */
     box-sizing: border-box; /* Important! */
     transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -261,4 +262,11 @@ td .btn {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     font-weight: 500;
+}
+
+/* --- 10. Placeholder Text Fix --- */
+/* Fix for placeholder text in dark mode */
+.form-group input::placeholder {
+    color: #4B5563; /* A muted gray */
+    opacity: 1;
 }
