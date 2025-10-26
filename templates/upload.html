@@ -15,10 +15,111 @@
             <label for="email">Your Email *</label>
             <input type="email" id="email" name="email" required>
         </div>
+        
         <div class="form-group">
             <label for="file">Your File(s) *</label>
             <input type="file" id="file" name="file" required multiple>
         </div>
+
+        <div class="file-preview-area" id="file-preview">
+            <h3>Selected Files</h3>
+            <ul class="file-preview-list" id="file-preview-list">
+                </ul>
+        </div>
+        
         <button type="submit" class="btn">Upload File(s)</button>
     </form>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    // Wait for the document to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Get references to our HTML elements
+        const fileInput = document.getElementById('file');
+        const previewArea = document.getElementById('file-preview');
+        const previewList = document.getElementById('file-preview-list');
+        
+        // This is a global 'bucket' to hold our files
+        let fileStore = new DataTransfer();
+
+        // 1. Listen for when the user selects files
+        fileInput.addEventListener('change', handleFileSelect);
+
+        function handleFileSelect(event) {
+            // Get the list of newly selected files
+            const newFiles = event.target.files;
+            
+            // Add these new files to our global 'bucket'
+            for (let file of newFiles) {
+                fileStore.items.add(file);
+            }
+            
+            // Update the file input's internal list to match our bucket
+            fileInput.files = fileStore.files;
+            
+            // Re-draw the visual preview list
+            updatePreviewList();
+        }
+
+        // 2. Function to draw the list of files
+        function updatePreviewList() {
+            // Clear the old list
+            previewList.innerHTML = '';
+            
+            // Get all files from our bucket
+            const files = fileStore.files;
+
+            if (files.length === 0) {
+                // If no files, hide the preview area
+                previewArea.style.display = 'none';
+                return;
+            }
+
+            // Show the preview area
+            previewArea.style.display = 'block';
+
+            // Loop through each file and create a list item
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // Create the list item element
+                const listItem = document.createElement('li');
+                listItem.className = 'file-preview-item';
+                
+                // Add the file name
+                listItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <button type"button" data-index="${i}" title="Remove file">&times;</button>
+                `;
+                
+                // Add this new item to the list
+                previewList.appendChild(listItem);
+            }
+        }
+        
+        // 3. Listen for clicks on the "remove" buttons
+        // We listen on the whole list for any clicks
+        previewList.addEventListener('click', function(event) {
+            
+            // Check if the clicked item was a <button>
+            if (event.target.tagName === 'BUTTON') {
+                
+                // Get the index (the 'data-index' number) of the file to remove
+                const index = event.target.dataset.index;
+                
+                // Remove that file from our global bucket
+                fileStore.items.remove(index);
+                
+                // Update the file input's internal list
+                fileInput.files = fileStore.files;
+                
+                // Re-draw the preview list
+                updatePreviewList();
+            }
+        });
+    });
+</script>
 {% endblock %}
