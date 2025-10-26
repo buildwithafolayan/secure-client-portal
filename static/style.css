@@ -1,0 +1,264 @@
+/* --- 1. Root & Color Palette --- */
+:root {
+    --background: #111827;  /* Very dark blue-gray */
+    --card-bg: #1F2937;       /* Lighter dark card */
+    --border: #374151;        /* Subtle border */
+    --text: #D1D5DB;          /* Light gray for text */
+    --heading: #F9FAFB;      /* Bright white for headings */
+    --accent: #3B82F6;        /* Bright blue */
+    --accent-hover: #2563EB;   /* Darker blue for hover */
+
+    --success-bg: rgba(16, 185, 129, 0.1);
+    --success-text: #10B981;
+    --success-border: #10B981;
+    
+    --error-bg: rgba(239, 68, 68, 0.1);
+    --error-text: #EF4444;
+    --error-border: #EF4444;
+    
+    --info-bg: rgba(59, 130, 246, 0.1);
+    --info-text: #3B82F6;
+    --info-border: #3B82F6;
+}
+
+/* --- 2. General Body & Typography --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    background: var(--background);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: var(--heading);
+    margin-top: 0;
+    line-height: 1.3;
+}
+h1 { font-size: 2.2rem; }
+h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+
+p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: var(--accent-hover);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+/* --- 3. Navigation --- */
+nav {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+nav .container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+nav a {
+    color: var(--heading);
+    font-weight: 600;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul a {
+    color: var(--text);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+nav ul a:hover {
+    color: var(--accent);
+}
+
+/* --- 4. Main Content Wrapper (The "Card") --- */
+.content-wrapper {
+    max-width: 900px;
+    margin: 2.5rem auto;
+    padding: 2.5rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 5. Modern Forms --- */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--heading);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--background);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text);
+    box-sizing: border-box; /* Important! */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* --- 6. The "Smart" File Input --- */
+.form-group input[type="file"] {
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+/* This styles the "Choose File" button */
+.form-group input[type="file"]::file-selector-button {
+    font-weight: 600;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #FFF;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-right: 1rem;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+
+/* --- 7. The Button --- */
+.btn {
+    display: inline-block;
+    padding: 0.9rem 1.8rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+.btn:active {
+    transform: translateY(0);
+}
+
+
+/* --- 8. Flash Messages --- */
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.messages li {
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.messages .success {
+    background: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid var(--success-border);
+}
+
+.messages .error {
+    background: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid var(--error-border);
+}
+
+.messages .info {
+    background: var(--info-bg);
+    color: var(--info-text);
+    border: 1px solid var(--info-border);
+}
+
+/* --- 9. Dashboard Table --- */
+.responsive-table {
+    width: 100%;
+    overflow-x: auto; /* Makes table scroll on small screens */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+th, td {
+    padding: 1rem;
+    border: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: #111827;
+    color: var(--heading);
+    font-weight: 600;
+}
+
+/* Zebra striping for readability */
+tbody tr:nth-child(even) {
+    background: #161e2b;
+}
+
+/* Make table text easier to read */
+td {
+    font-size: 0.95rem;
+}
+
+/* Style the download button in the table */
+td .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
