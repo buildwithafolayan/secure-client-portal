@@ -12,6 +12,7 @@ from datetime import datetime
 # --- 2. App Initialization & Configuration ---
 app = Flask(__name__)
 
+# Get the secret key from environment variables
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-fallback-key-for-local-dev')
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024 # 100MB upload limit
 
@@ -76,6 +77,10 @@ def load_user(user_id):
 # --- 5. Public Routes (File Upload) ---
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    # Ensure DB exists right before we use it
+    with app.app_context():
+        db.create_all()
+        
     if request.method == 'POST':
         client_name = request.form['name']
         client_email = request.form['email']
@@ -125,7 +130,7 @@ def upload_file():
 # --- 6. Admin Routes (Login, Dashboard, etc.) ---
 @app.route('/admin/register', methods=['GET', 'POST'])
 def register():
-    # NEW: Ensure DB exists right before we use it
+    # Ensure DB exists right before we use it
     with app.app_context():
         db.create_all()
     
@@ -148,6 +153,10 @@ def register():
 
 @app.route('/admin/login', methods=['GET', 'POST'])
 def login():
+    # Ensure DB exists right before we use it
+    with app.app_context():
+        db.create_all()
+        
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
@@ -167,6 +176,9 @@ def login():
 @app.route('/admin/dashboard')
 @login_required
 def dashboard():
+    # Ensure DB exists just in case
+    with app.app_context():
+        db.create_all()
     # FIX: Changed all__files (two underscores) to all_files (one underscore)
     all_files = FileUpload.query.order_by(FileUpload.upload_timestamp.desc()).all()
     return render_template('dashboard.html', files=all_files)
@@ -179,7 +191,7 @@ def logout():
     return redirect(url_for('login'))
 
 # --- 7. Database Creation (for Vercel) ---
-# Create a simple route that we can call to initialize the database
+# This route is no longer needed but is harmless to keep
 @app.route('/init-db')
 def init_db():
     with app.app_context():
