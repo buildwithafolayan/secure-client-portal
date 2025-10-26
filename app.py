@@ -125,6 +125,11 @@ def upload_file():
 # --- 6. Admin Routes (Login, Dashboard, etc.) ---
 @app.route('/admin/register', methods=['GET', 'POST'])
 def register():
+    # NEW: Ensure DB exists right before we use it
+    with app.app_context():
+        db.create_all()
+    
+    # Now, check for the user
     with app.app_context():
         if User.query.first():
              flash('An admin account already exists.', 'info')
@@ -162,7 +167,8 @@ def login():
 @app.route('/admin/dashboard')
 @login_required
 def dashboard():
-    all__files = FileUpload.query.order_by(FileUpload.upload_timestamp.desc()).all()
+    # FIX: Changed all__files (two underscores) to all_files (one underscore)
+    all_files = FileUpload.query.order_by(FileUpload.upload_timestamp.desc()).all()
     return render_template('dashboard.html', files=all_files)
 
 @app.route('/admin/logout')
@@ -178,7 +184,7 @@ def logout():
 def init_db():
     with app.app_context():
         db.create_all()
-    return "Database initialized!"
+    return "Database initialized! (This route is no longer required)"
 
 # --- 8. Run the App (for local development) ---
 if __name__ == '__main__':
@@ -186,3 +192,4 @@ if __name__ == '__main__':
         # This will create our new 'database.db' in the local folder
         db.create_all()
     app.run(debug=True)
+
