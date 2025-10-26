@@ -1,24 +1,24 @@
-/* --- 1. Root & Color Palette --- */
+/* --- 1. Root & Calm Color Palette --- */
 :root {
-    --background: #111827;  /* Very dark blue-gray */
-    --card-bg: #1F2937;       /* Lighter dark card */
-    --border: #374151;        /* Subtle border */
-    --text: #D1D5DB;          /* Light gray for text */
-    --heading: #F9FAFB;      /* Bright white for headings */
-    --accent: #3B82F6;        /* Bright blue */
-    --accent-hover: #2563EB;   /* Darker blue for hover */
+    --background: #f4f7f6;  /* Soft, light gray background */
+    --card-bg: #ffffff;       /* Clean white card */
+    --border: #dde1e6;        /* Light, subtle border */
+    --text: #555555;          /* Readable dark gray for text */
+    --heading: #111111;      /* Strong black for headings */
+    --accent: #007aff;        /* Professional, calm blue */
+    --accent-hover: #0056b3;   /* Darker blue for hover */
 
-    --success-bg: rgba(16, 185, 129, 0.1);
-    --success-text: #10B981;
-    --success-border: #10B981;
+    --success-bg: #e6f7ec;
+    --success-text: #228b22;
+    --success-border: #b7e1cd;
     
-    --error-bg: rgba(239, 68, 68, 0.1);
-    --error-text: #EF4444;
-    --error-border: #EF4444;
+    --error-bg: #fbebeb;
+    --error-text: #c0392b;
+    --error-border: #f1c0c0;
     
-    --info-bg: rgba(59, 130, 246, 0.1);
-    --info-text: #3B82F6;
-    --info-border: #3B82F6;
+    --info-bg: #e5f3ff;
+    --info-text: #007aff;
+    --info-border: #b8d9f9;
 }
 
 /* --- 2. General Body & Typography --- */
@@ -40,7 +40,7 @@ h1 { font-size: 2.2rem; }
 h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
 
 p {
-    color: var(--text); /* Fix: Ensure paragraph text is light */
+    color: var(--text);
     margin-top: 0;
     margin-bottom: 1.5rem;
 }
@@ -65,6 +65,7 @@ nav {
     background: var(--card-bg);
     border-bottom: 1px solid var(--border);
     padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 nav .container {
@@ -98,15 +99,15 @@ nav ul a:hover {
     color: var(--accent);
 }
 
-/* --- 4. Main Content Wrapper (The "Card") --- */
+/* --- 4. Main Content Wrapper (Centered Card) --- */
 .content-wrapper {
-    max-width: 900px;
+    max-width: 800px; /* Made it a bit narrower for a cleaner look */
     margin: 2.5rem auto;
-    padding: 2.5rem;
+    padding: 3rem; /* More padding */
     background: var(--card-bg);
     border-radius: 12px;
     border: 1px solid var(--border);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 /* --- 5. Modern Forms --- */
@@ -118,7 +119,7 @@ nav ul a:hover {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: var(--heading); /* Fix: Ensure labels are bright white */
+    color: var(--heading);
 }
 
 .form-group input[type="text"],
@@ -127,18 +128,24 @@ nav ul a:hover {
     width: 100%;
     padding: 0.9rem 1rem;
     border: 1px solid var(--border);
-    background: var(--background); /* Fix: Dark background for input */
+    background: #fdfdfd; 
     border-radius: 8px;
     font-size: 1rem;
-    color: var(--text); /* Fix: Light text color when typing */
+    color: var(--heading); /* Dark text for typing */
     box-sizing: border-box; /* Important! */
     transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #999;
+    opacity: 1;
 }
 
 .form-group input:focus {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    background: var(--card-bg);
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
 }
 
 /* --- 6. The "Smart" File Input --- */
@@ -147,28 +154,30 @@ nav ul a:hover {
     font-size: 0.95rem;
 }
 
-/* This styles the "Choose File" button */
 .form-group input[type="file"]::file-selector-button {
     font-weight: 600;
     padding: 0.7rem 1.2rem;
     border-radius: 8px;
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: #FFF;
+    border: 1px solid var(--border);
+    background: #fdfdfd;
+    color: var(--accent);
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s;
     margin-right: 1rem;
 }
 
 .form-group input[type="file"]::file-selector-button:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
 }
 
 
 /* --- 7. The Button --- */
 .btn {
     display: inline-block;
+    width: 100%; /* Make button full-width for a modern form look */
+    box-sizing: border-box;
     padding: 0.9rem 1.8rem;
     background: var(--accent);
     color: #fff;
@@ -178,6 +187,7 @@ nav ul a:hover {
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
+    text-align: center;
     transition: background-color 0.2s, transform 0.1s;
 }
 
@@ -236,37 +246,34 @@ table {
 
 th, td {
     padding: 1rem;
-    border: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     text-align: left;
     vertical-align: middle;
 }
 
+/* Remove side borders for a cleaner look */
 th {
-    background: #111827;
+    border-top: 1px solid var(--border);
+    background: var(--background);
     color: var(--heading);
     font-weight: 600;
 }
 
 /* Zebra striping for readability */
 tbody tr:nth-child(even) {
-    background: #161e2b;
+    background: #fdfdfd;
 }
 
 /* Make table text easier to read */
 td {
     font-size: 0.95rem;
+    color: var(--text);
 }
 
 /* Style the download button in the table */
 td .btn {
+    width: auto; /* Make button in table fit its content */
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     font-weight: 500;
-}
-
-/* --- 10. Placeholder Text Fix --- */
-/* Fix for placeholder text in dark mode */
-.form-group input::placeholder {
-    color: #4B5563; /* A muted gray */
-    opacity: 1;
 }
